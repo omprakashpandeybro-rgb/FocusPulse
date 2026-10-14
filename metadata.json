@@ -1,0 +1,6 @@
+{
+  "name": "FocusPulse",
+  "description": "Smart schedule organizer, alarm reminders, and deep focus blocker with YouTube shorts filtering, personalized for your age and study level.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
