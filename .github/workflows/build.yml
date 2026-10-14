@@ -12,6 +12,17 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Fix missing debug.keystore
+        run: |
+          # Create the keystore that your build.gradle is asking for
+          if [ ! -f "debug.keystore" ]; then
+            keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -dname "CN=Android Debug,O=Android,C=US" -keyalg RSA -keysize 2048 -validity 10000
+            echo "Created debug.keystore at root"
+          fi
+          ls -la debug.keystore
+          # Also copy to app/ folder if needed
+          cp debug.keystore app/debug.keystore || true
+
       - name: Setup Android SDK
         run: |
           echo "ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
