@@ -1,0 +1,51 @@
+name: Unzip Folders
+on: push
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Unzip gradle and app
+        run: |
+          # Unzip gradle.zip if exists at root
+          if [ -f "gradle.zip" ]; then
+            unzip -o gradle.zip
+            rm gradle.zip
+            echo "Unzipped gradle.zip"
+          fi
+
+          # Unzip app.zip if exists at root
+          if [ -f "app.zip" ]; then
+            unzip -o app.zip
+            rm app.zip
+            echo "Unzipped app.zip"
+          fi
+
+          # Also check inside folders (if you uploaded zip inside folder)
+          if [ -f "gradle/gradle.zip" ]; then
+            unzip -o gradle/gradle.zip -d gradle/
+            rm gradle/gradle.zip
+          fi
+          if [ -f "app/app.zip" ]; then
+            unzip -o app/app.zip -d app/
+            rm app/app.zip
+          fi
+
+          ls -la
+          ls -la gradle/ || true
+          ls -la app/ || true
+
+      - name: Commit unzipped files
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git status
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "Auto unzip gradle and app folders"
+            git push
+          else
+            echo "Nothing to commit - already unzipped"
+          fi
