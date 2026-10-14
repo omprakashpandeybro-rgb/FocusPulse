@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">FocusPulse</string>
+    <string name="accessibility_service_description">FocusPulse uses Accessibility to monitor distracting app usage and block YouTube Shorts/Reels during scheduled deep work sessions while allowing educational and study videos.</string>
+    <string name="notification_channel_alarm_name">Schedule Alarms</string>
+    <string name="notification_channel_alarm_desc">Loud alarm and task reminders for scheduled work and study blocks.</string>
+    <string name="notification_channel_focus_name">Focus Session Active</string>
+    <string name="notification_channel_focus_desc">Shows ongoing deep work session and blocker status.</string>
+    <string name="notification_channel_block_name">Distraction Intercepted</string>
+    <string name="notification_channel_block_desc">Alerts when a distracting app or YouTube Shorts is shielded.</string>
+</resources>
